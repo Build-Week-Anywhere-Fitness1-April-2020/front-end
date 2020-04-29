@@ -1,0 +1,87 @@
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: center;
+  text-align: left;
+  font-size: 2em;
+  padding: 20px;
+  font-family: raleway;
+  font-style: normal;
+  font-weight: bold;
+
+  color: black;
+  margin: 20px 20px 0px 50px;
+
+  @media @phone {
+    display: none;
+  }
+}
+
+p {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  align-self: center;
+  text-align: left;
+  font-family: raleway;
+  font-style: normal;
+  font-weight: bold;
+  color: black;
+  padding: 15px;
+
+  @media @phone {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+  }
+}
+
+
+.gym-img {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-end;
+  float: right;
+}
+
+.gym-2 {
+  display: flex;
+  justify-content: flex-end;
+  width: 550px;
+
+
+  @media @phone {
+    width: 100%;
+  }
+}
+
+
+.btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: center;
+  font-family: raleway;
+  font-style: normal;
+  font-weight: bold;
+  border-radius: 20px;
+  justify-content: space-evenly;
+}
+
+.button-1 {
+
+  background-color: @primary;
+  color: whitesmoke;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.button-2 {
+  background-color: @primary;
+  color: whitesmoke;
+  border-radius: 20px;
+}
