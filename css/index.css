@@ -278,3 +278,30 @@ p {
   color: whitesmoke;
   border-radius: 20px;
 }
+.nav-bar {
+  background-color: red;
+}
+.team {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+img {
+  background-color: #ecb651;
+  border-radius: 50%;
+  width: 50%;
+  height: 50%;
+}
+img:hover {
+  filter: hue-rotate(180deg);
+  opacity: 0.5;
+}
+h3 {
+  color: red;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 15px;
+}
