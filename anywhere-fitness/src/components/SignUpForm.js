@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import Login from "../images/Login background.png";
+import { connect } from 'react-redux';
+import { signUpFetch } from '../store/actions';
+import { useHistory } from 'react-router-dom'
 
-const SignUp = (props) => {
+const SignUp = props => {
+  const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -26,142 +30,108 @@ const SignUp = (props) => {
     }
   };
   const submit = async (e) => {
-    console.log("submit", "<<<submit data");
     e.preventDefault();
-    axios
-      .post(
-        "https://anywherefitness-api.herokuapp.com/auth/register",
-        credentials
-      )
-      .then((res) => {
-        // console.log(res.data);
-        // res,data,payload
-        // redux - send the token to the redux store
-        // browser storage - localStorage (this is probably the least secure choice)
-        // cookies
-        // localStorage.setItem("token", JSON.stringify(res.data.payload));
-        // props.history.push("/friends-list");
-        console.log(res);
-        setCredentials({
-          username: "",
-          email: "",
-          password: "",
-          roles: [],
-        });
-      })
-      .catch((err) => console.log({ err }));
+    // redux action for sign up
+    // performs axios call
+    await props.signUpFetch(credentials);
+    setCredentials({
+      username: "",
+      email: "",
+      password: "",
+    })
+    push('/')
   };
   return (
-    <div>
-      <h1>Sign Up</h1>
-      {/* <form onSubmit={submit}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          value={credentials.username}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={credentials.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          name="password"
-          value={credentials.password}
-          onChange={handleChange}
-        />
-        <label htmlFor="client"> Client </label>
-        <input
-          type="radio"
-          id="client"
-          name="roles"
-          value="client"
-          onChange={handleChange}
-        />
-        <label htmlFor="instructor"> Instructor </label>
-        <input
-          type="radio"
-          id="instructor"
-          name="roles"
-          value="instructor"
-          onChange={handleChange}
-        />
-        <button>Submit</button>
-      </form> */}
+    <div className="signUpContainer">
 
-      <Form onSubmit={submit}>
-        <FormGroup>
-          <Label htmlFor="username">Username</Label>
-          <Input
-            id="username"
-            type="text"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-          />
-        </FormGroup>
+      <div className="signUpImage mx-auto">
+        <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
+      </div>
 
-        <FormGroup>
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-          />
-        </FormGroup>
-
-        <FormGroup tag="fieldset">
-          <legend>Would you like to register as a client or instructor?</legend>
-          <FormGroup check>
-            <Label check>
+      <div className="signUpFormContainer">
+        <div className="signUpForm mx-auto">
+          <h1 className="font-weight-bold mb-5">Sign Up</h1>
+          <Form onSubmit={submit}>
+            <FormGroup>
+              <Label htmlFor="username">Username</Label>
               <Input
-                type="radio"
-                id="client"
-                name="roles"
-                value="client"
+                id="username"
+                type="text"
+                name="username"
+                value={credentials.username}
                 onChange={handleChange}
-              />{" "}
-              I'm a client.
-            </Label>
-          </FormGroup>
-          <FormGroup check>
-            <Label check>
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label htmlFor="email">Email</Label>
               <Input
-                type="radio"
-                id="instructor"
-                name="roles"
-                value="instructor"
+                id="email"
+                type="email"
+                name="email"
+                value={credentials.email}
                 onChange={handleChange}
-              />{" "}
-              I'm an instructor.
-            </Label>
-          </FormGroup>
-        </FormGroup>
-      </Form>
-      <Button onClick={submit}>Confirm</Button>
+                required
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+                required
+              />
+            </FormGroup>
+
+            <FormGroup tag="fieldset">
+              <legend>
+                Would you like to register as a client or an instructor?
+              </legend>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="client"
+                    name="roles"
+                    value="client"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm a client.
+                </Label>
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input
+                    type="radio"
+                    id="instructor"
+                    name="roles"
+                    value="instructor"
+                    onChange={handleChange}
+                  />{" "}
+                  I'm an instructor.
+                </Label>
+              </FormGroup>
+            </FormGroup>
+            <Button className="w-25">Confirm</Button>
+          </Form>
+          {props.error ? <p>{props.error}</p> : null}
+          {props.success ? <p>{props.success}</p>: null}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SignUp;
+const mapStateToProps = state => {
+  return {
+    success: state.signUp.success,
+    isFetching: state.signUp.isFetching,
+    error: state.signUp.error
+  }
+}
+
+export default connect(mapStateToProps, { signUpFetch })(SignUp);

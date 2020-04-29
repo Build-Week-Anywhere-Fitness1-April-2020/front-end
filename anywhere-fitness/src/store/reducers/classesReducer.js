@@ -1,35 +1,35 @@
 import { 
-    FETCH_START, 
-    FETCH_SUCCESS,
-    FETCH_FAILURE
+    GET_CLASSES_START, 
+    GET_CLASSES_SUCCESS,
+    GET_CLASSES_FAILURE
 } from '../actions'
 
 const initialState = {
-  success: '',
-  isFetching: false,
-  error: ''
+    classes: [],
+    isFetching: false,
+    error: ''
 };
 
-export const signUpReducer = ( state = initialState, action) => {
+export const classesReducer = ( state = initialState, action) => {
     switch (action.type) {
-        case FETCH_START:
+        case GET_CLASSES_START:
             return {
                 ...state,
                 isFetching: true
             };
-        case FETCH_SUCCESS:
-            // console.log(action.payload)
+        case GET_CLASSES_SUCCESS:
+            // console.log('setting classes',action.payload)
             return {
                 ...state,
+                classes: action.payload,
                 isFetching: false,
-                success: action.payload,
-                error: ''
+                error: '',
             };
-        case FETCH_FAILURE:
+        case GET_CLASSES_FAILURE:
             // console.log(action.payload)
             return {
                 ...state,
-                success: '',
+                classes: [],
                 isFetching: false,
                 error: action.payload
             };
