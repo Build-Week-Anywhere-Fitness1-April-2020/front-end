@@ -1,7 +1,8 @@
 import { 
     GET_CLASSES_START, 
     GET_CLASSES_SUCCESS,
-    GET_CLASSES_FAILURE
+    GET_CLASSES_FAILURE,
+    LOGOUT,
 } from '../actions'
 
 const initialState = {
@@ -33,6 +34,11 @@ export const classesReducer = ( state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
+        case LOGOUT:
+            return {
+                ...state,
+                classes: []
+            }
         default:
             return state;
     }

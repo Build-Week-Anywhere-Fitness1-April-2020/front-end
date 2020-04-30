@@ -32,11 +32,11 @@ const LoginForm = (props) => {
 
   return (
     <div className="signUpContainer">
-      <div className="signUpImage mx-auto">
+      <div className="signUpImage">
         <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
       </div>
       <div className="signUpFormContainer">
-        <div className="signUpForm mx-auto">
+        <div className="signUpForm">
           <h1 className="font-weight-bold mb-5">Sign In</h1>
           <Form onSubmit={submit}>
             <FormGroup>
@@ -88,7 +88,7 @@ const LoginForm = (props) => {
                 </Label>
               </FormGroup>
             </FormGroup>
-            <Button className="w-25">Confirm</Button>
+            <Button className="w-50">Confirm</Button>
           </Form>
         </div>
       </div>

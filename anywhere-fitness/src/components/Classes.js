@@ -22,7 +22,7 @@ const Classes = (props) => {
                 <p>Time: {classObj.time}</p>
               </div>
               <div>
-                <p>Class Description: {classObj.description}</p>
+                <p>Class Description: {classObj.courseDescription}</p>
               </div>
               <div>
                 <p>Location: {classObj.address}</p>

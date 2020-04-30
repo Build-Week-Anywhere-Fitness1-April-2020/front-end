@@ -12,7 +12,7 @@ const EditClass = (props) => {
     const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
     delete filter.instructor;
     delete filter.days;
-    console.log(filter)
+    // console.log(filter)
     setEditClass(filter) 
   }, [params.id])
 

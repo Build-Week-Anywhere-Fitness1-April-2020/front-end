@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
+import { useParams, Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const DetailedClasses = (props) => {
@@ -19,20 +19,21 @@ const DetailedClasses = (props) => {
     return <div>Loading class information...</div>;
   }
 
-  const deleteClass = e =>{
+  const deleteClass = (e) => {
     e.preventDefault();
     axiosWithAuth(props.token)
       .delete(`classes/${params.id}`)
-      .then(res => {
-        console.log(res)
-        push('/classes')
+      .then((res) => {
+        console.log(res);
+        push("/classes");
       })
-      .catch(err => console.log(err));
-  }
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="classDetails">
       <h2>{classDetail.name}</h2>
+      <img src={classDetail.imgUrl} width={300}></img>
       <div>
         <p>Time: {classDetail.time}</p>
       </div>
@@ -67,22 +68,30 @@ const DetailedClasses = (props) => {
         <p>Additional Info: {classDetail.additionalInfo}</p>
       </div>
       <div>
-        <p>Days: {classDetail.days.map(day => (
+        <p>
+          Days:{" "}
+          {classDetail.days.map((day) => (
             <span>{day} </span>
-        ))}</p>
+          ))}
+        </p>
       </div>
-      <Link to='/classes'>
-        Back to class list
-      </Link>
-      { props.role === 'instructor' ? 
-        <div>
-          <button onClick={deleteClass}>Delete Class</button>
+      <div className='links'>
+      <button onclick={() => push("/classes")}>Back to class list</button>
+      {props.role === "instructor" ? (
+        <>
           <button 
+            className='delete-btn' 
+            onClick={deleteClass}>
+              Delete Class
+          </button>
+          <button 
+            className='edit-btn' 
             onClick={() => push(`/edit-class/${params.id}`)}>
             Edit Class
           </button>
-        </div>
-        : null }
+        </>
+      ) : null}
+      </div>
     </div>
   );
 };
@@ -91,8 +100,8 @@ const mapStateToProps = (state) => {
   return {
     classes: state.classes.classes,
     token: state.login.token,
-    role: state.login.role
-  }
-}
+    role: state.login.role,
+  };
+};
 
 export default connect(mapStateToProps, null)(DetailedClasses);

@@ -17,45 +17,33 @@ body {
   display: flex;
 
   .signUpImage {
-    width: 50%;
+    width: 40%;
 
     @media (max-width: $mobile) {
       display: none;
     }
   }
   .signUpFormContainer {
-    padding-top: 100px !important;
-    width: 50%;
+    padding-top: 2.5rem !important;
+    width: 40%;
+    padding-left: 2.5rem !important;
 
     @media (max-width: $mobile) {
       width: 100%;
       padding-top: 40px !important;
+      padding-left: 0px !important;
     }
   }
 
   .signUpForm {
-    margin-top: 80px;
-    width: 80% !important;
+    width: 70% !important;
+
+    @media (max-width: $mobile) {
+      width: 90%;
+      margin: 0px auto 20px auto;
+    }
   }
 }
-
-// Navigation styling - Forms
-// .navigation {
-//   text-align: center;
-//   background-color: #ff9233;
-//   padding: 10px;
-//   font-weight: 700;
-//   font-size: 1.5rem;
-
-//   a {
-//     color: black;
-//   }
-
-//   a:hover {
-//     text-decoration: none;
-//     color: black;
-//   }
-// }
 
 // Navigation Styling - Site
 nav {
@@ -64,7 +52,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: $white;
-    padding: 20px 30px;
+    padding: 0px 30px 25px 30px;
     font-weight: 700;
     font-size: 1.2rem;
 
@@ -79,20 +67,14 @@ nav {
     a:hover {
       text-decoration: none;
       color: $orange;
+      cursor: pointer;
     }
 
     @media (max-width: $mobile) {
       flex-direction: column;
       text-align: center;
-
-      h1 {
-        font-size: 2rem;
-        margin: 20px 0px 15px 0px;
-      }
     }
   }
-
-  //Lower Navbar Instructor
 
   //Lower Navbar User
   .navLinksUser {
@@ -121,6 +103,7 @@ nav {
   }
 }
 
+//Lower Navbar Instructor
 .navLinksInstructor {
   background-color: $orange;
   padding: 10px 30px;
