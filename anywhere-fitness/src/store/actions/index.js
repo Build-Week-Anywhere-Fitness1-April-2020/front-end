@@ -34,13 +34,22 @@ export const loginFetch = userInfo => dispatch => {
     axios
         .post(`https://anywherefitness-api.herokuapp.com/auth/login`, userInfo)
         .then(res =>{
-            // console.log(res)
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data.token })
+            // console.log(res.data)
+            localStorage.setItem('role', JSON.stringify(res.data.role))
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data })
         })
         .catch( error => {
-            console.log({error})
-            dispatch({ type: LOGIN_FAILURE, payload: error })
+            // console.log({error})
+            const errRes = { error }
+            dispatch({ type: LOGIN_FAILURE, payload: errRes })
         })
+}
+
+export const LOGOUT = 'LOGOUT';
+
+export const logoutUser = info => dispatch => {
+    localStorage.removeItem('role')
+    dispatch({ type: LOGOUT })
 }
 
 export const GET_CLASSES_START = 'GET_CLASSES_START';
@@ -57,6 +66,27 @@ export const classesFetch = token => dispatch => {
                 dispatch({ type: GET_CLASSES_SUCCESS, payload: res.data })
             })
             .catch(err => {
-                console.log({err})
+                // console.log({err})
+                const errRes = { err }
+                dispatch({ type: LOGIN_FAILURE, payload: errRes })
             })
+}
+
+export const CREATE_START = 'CREATE_START';
+export const CREATE_SUCCESS = 'CREATE_SUCCESS';
+export const CREATE_FAILURE = 'CREATE_FAILURE';
+
+export const createFetch = (token, createClass) => dispatch => {
+    dispatch({ type: CREATE_START })
+    axiosWithAuth(token)
+      .post("classes/", createClass)
+      .then((res) => {
+        // console.log(res)
+        dispatch({ type: GET_CLASSES_SUCCESS, payload: res.data })
+      })
+      .catch((err) =>{ 
+          //console.log({ err })
+          const errRes = { err }
+          dispatch({ type: LOGIN_FAILURE, payload: errRes })
+      })
 }

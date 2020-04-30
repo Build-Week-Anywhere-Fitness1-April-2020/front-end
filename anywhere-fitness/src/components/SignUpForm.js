@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
-import { connect } from 'react-redux';
-import { signUpFetch } from '../store/actions';
-import { useHistory } from 'react-router-dom'
+import { connect } from "react-redux";
+import { signUpFetch } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
-const SignUp = props => {
+const SignUp = (props) => {
   const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
@@ -38,12 +38,11 @@ const SignUp = props => {
       username: "",
       email: "",
       password: "",
-    })
-    push('/')
+    });
+    push("/");
   };
   return (
     <div className="signUpContainer">
-
       <div className="signUpImage mx-auto">
         <img src={Login} alt="Woman practicing yoga" className="w-100"></img>
       </div>
@@ -84,6 +83,7 @@ const SignUp = props => {
                 value={credentials.password}
                 onChange={handleChange}
                 required
+                minLength="8"
               />
             </FormGroup>
 
@@ -99,6 +99,7 @@ const SignUp = props => {
                     name="roles"
                     value="client"
                     onChange={handleChange}
+                    required
                   />{" "}
                   I'm a client.
                 </Label>
@@ -119,19 +120,19 @@ const SignUp = props => {
             <Button className="w-25">Confirm</Button>
           </Form>
           {props.error ? <p>{props.error}</p> : null}
-          {props.success ? <p>{props.success}</p>: null}
+          {props.success ? <p>{props.success}</p> : null}
         </div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     success: state.signUp.success,
     isFetching: state.signUp.isFetching,
-    error: state.signUp.error
-  }
-}
+    error: state.signUp.error,
+  };
+};
 
 export default connect(mapStateToProps, { signUpFetch })(SignUp);

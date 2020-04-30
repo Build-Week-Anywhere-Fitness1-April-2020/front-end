@@ -1,46 +1,50 @@
 import React, { useEffect } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { classesFetch } from "../store/actions";
+import { Link } from "react-router-dom";
 
-const Classes = props => {
- 
-    useEffect(()=>{
-        // console.log('useeffect hook')
-        props.classesFetch(props.token)
-        console.log(props.classes)
-    }, [props.token])
+const Classes = (props) => {
+  useEffect(() => {
+    // console.log('useeffect hook')
+    props.classesFetch(props.token);
     // console.log(props.classes)
-    return (
-        <div>
-            
-            <h2>Classes</h2>
-            
-            { props.classes.length ? props.classes.map(classitem => (
-                <div className="class-card" key={classitem.id}>
-                    <h2>{classitem.name}</h2>
-                    <div>
-                        <p>Time: {classitem.time}</p>
-                    </div>
-                    <div>
-                        <p>Class Description: {classitem.description}</p>
-                    </div>
-                    <div>
-                        <p>Location: {classitem.address}</p>
-                    </div>
-                    <div>
-                        <p>Class starting: {classitem.startDate}</p>
-                    </div>
-                </div>
-            )) : <p>Login to view classes</p>}
-
-        </div>
-    );
+  }, [props.token]);
+  // console.log(props.classes)
+  return (
+    <div className="classContainer">
+      <h2 className="title">Classes</h2>
+      <div className="cardContainer">
+        {props.classes.length ? (
+          props.classes.map((classObj) => (
+            <div className="class-card" key={classObj.id}>
+              <h2>{classObj.name}</h2>
+              <div>
+                <p>Time: {classObj.time}</p>
+              </div>
+              <div>
+                <p>Class Description: {classObj.description}</p>
+              </div>
+              <div>
+                <p>Location: {classObj.address}</p>
+              </div>
+              <div>
+                <p>Class starting: {classObj.startDate}</p>
+              </div>
+              <Link to={`class-details/${classObj.id}`}>Class Details</Link>
+            </div>
+          ))
+        ) : (
+          <p className="login">Login to view classes</p>
+        )}
+      </div>
+    </div>
+  );
 };
 
-const mapStateToProps = state => {
-    return {
-        token: state.login.token,
-        classes: state.classes.classes
-    }
-}
-export default connect(mapStateToProps, { classesFetch } )(Classes);
+const mapStateToProps = (state) => {
+  return {
+    token: state.login.token,
+    classes: state.classes.classes,
+  };
+};
+export default connect(mapStateToProps, { classesFetch })(Classes);

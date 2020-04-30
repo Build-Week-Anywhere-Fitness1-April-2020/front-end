@@ -3,6 +3,11 @@ $orange: #ff9233;
 $black: #000;
 $white: #fff;
 
+@import "CreateClass";
+@import "Reset";
+@import "Classes";
+@import "DetailedClassCard";
+
 body {
   font-size: 62.5%;
 }
@@ -66,8 +71,11 @@ nav {
     a {
       color: $black;
       margin-left: 40px;
-    }
 
+      @media (max-width: $mobile) {
+        margin: 0px 20px;
+      }
+    }
     a:hover {
       text-decoration: none;
       color: $orange;
@@ -85,30 +93,6 @@ nav {
   }
 
   //Lower Navbar Instructor
-  .navLinksInstructor {
-    background-color: $orange;
-    padding: 10px 30px;
-
-    a {
-      color: $black;
-      margin-right: 60px;
-    }
-
-    a:hover {
-      text-decoration: none;
-      color: $white;
-    }
-
-    @media (max-width: $mobile) {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-
-      a {
-        margin: 5px 0px;
-      }
-    }
-  }
 
   //Lower Navbar User
   .navLinksUser {
@@ -133,6 +117,31 @@ nav {
       a {
         margin: 5px 0px;
       }
+    }
+  }
+}
+
+.navLinksInstructor {
+  background-color: $orange;
+  padding: 10px 30px;
+
+  a {
+    color: $black;
+    margin-right: 60px;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: $white;
+  }
+
+  @media (max-width: $mobile) {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    a {
+      margin: 5px 0px;
     }
   }
 }

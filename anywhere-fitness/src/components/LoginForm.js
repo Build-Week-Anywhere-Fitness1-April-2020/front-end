@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import Login from "../images/Login background.png";
-import { connect } from 'react-redux';
-import { loginFetch } from '../store/actions';
-import { useHistory } from 'react-router-dom';
+import { connect } from "react-redux";
+import { loginFetch } from "../store/actions";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = (props) => {
   const { push } = useHistory();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
-    role: ''
+    role: "",
   });
 
   const handleChange = (e) => {
@@ -22,12 +22,12 @@ const LoginForm = (props) => {
   //console.log(props.success)
   const submit = (e) => {
     e.preventDefault();
-    props.loginFetch(credentials)
+    props.loginFetch(credentials);
     setCredentials({
       username: "",
-      password: ""
-    })
-    push('/classes')
+      password: "",
+    });
+    push("/classes");
   };
 
   return (
@@ -57,6 +57,8 @@ const LoginForm = (props) => {
                 type="password"
                 name="password"
                 onChange={handleChange}
+                required
+                minLength="8"
               />
             </FormGroup>
             <FormGroup tag="fieldset">
@@ -68,6 +70,7 @@ const LoginForm = (props) => {
                     name="role"
                     value="client"
                     onChange={handleChange}
+                    required
                   />{" "}
                   I'm a client.
                 </Label>
@@ -93,13 +96,13 @@ const LoginForm = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     success: state.login.success,
     isFetching: state.login.isFetching,
     error: state.login.error,
-    token: state.login.token
-  }
-}
+    token: state.login.token,
+  };
+};
 
 export default connect(mapStateToProps, { loginFetch })(LoginForm);

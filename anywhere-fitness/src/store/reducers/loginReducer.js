@@ -1,11 +1,14 @@
 import { 
     LOGIN_START, 
     LOGIN_SUCCESS,
-    LOGIN_FAILURE
+    LOGIN_FAILURE,
+    LOGOUT
 } from '../actions'
 
 const initialState = {
+    role: '',
     token: '',
+    user: {},
     success: '',
     isFetching: false,
     error: ''
@@ -25,7 +28,9 @@ export const loginReducer = ( state = initialState, action) => {
                 isFetching: false,
                 success: 'Login Success!',
                 error: '',
-                token: action.payload
+                token: action.payload.token,
+                role: action.payload.role,
+                user: action.payload.user
             };
         case LOGIN_FAILURE:
             // console.log(action.payload)
@@ -34,6 +39,15 @@ export const loginReducer = ( state = initialState, action) => {
                 success: '',
                 isFetching: false,
                 error: action.payload
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                success: '',
+                error: '',
+                role: '',
+                token: '',
+                user: {}
             };
         default:
             return state;

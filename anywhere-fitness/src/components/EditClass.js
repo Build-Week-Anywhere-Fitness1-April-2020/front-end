@@ -1,64 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from 'react-redux';
-import { createFetch } from '../store/actions';
-import { useHistory } from 'react-router-dom';
-// import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { useParams, useHistory } from 'react-router-dom';
 
-const CreateClass = (props) => {
+const EditClass = (props) => {
+  const [editClass, setEditClass] = useState({});
+  const params = useParams();
   const { push } = useHistory();
-  const [createClass, setCreateClass] = useState({
-    name: "",
-    time: "",
-    duration: "", // float
-    intensity: "",
-    location: "",
-    maxSize: "", //int
-    classType: "", // id from database
-    imgUrl: "", // selected id from database
-    equipmentRequired: "",
-    arrivalDescription: "",
-    additionalInfo: "",
-    cost: "", // float
-    courseDescription: "",
-    address: "",
-    startDate: "",
-    instructor: props.user.id, // instructor id
-    days: [], // array of day strings
-  });
+
+  useEffect(()=>{
+    const [ filter ] = props.classes.filter(classObj => classObj.id == params.id)
+    delete filter.instructor;
+    delete filter.days;
+    console.log(filter)
+    setEditClass(filter) 
+  }, [params.id])
 
   const handleChange = (e) => {
     let value = e.target.value;
-    if (e.target.name === "duration" || e.target.name === "cost") {
-      value = parseFloat(value);
+    if (e.target.name === 'duration' || e.target.name === 'cost') {
+        value = parseFloat(value)
     }
-    if (
-      e.target.name === "maxSize" ||
-      e.target.name === "classType" ||
-      e.target.name === "imgUrl"
-    ) {
-      value = parseInt(value);
+    if (   e.target.name === 'maxSize' 
+        || e.target.name === 'classType' 
+        || e.target.name === 'imgUrl') {
+        value = parseInt(value)
     }
-    if (e.target.name === "days") {
-      value = value.trim();
-      value = value.split(",");
+    if ( e.target.name === 'days'){
+        value = value.trim()
+        value = value.split(',')
     }
-    setCreateClass({
-      ...createClass,
+    setEditClass({
+      ...editClass,
       [e.target.name]: value,
     });
   };
 
   const submit = (e) => {
     e.preventDefault();
-    props.createFetch(props.token, createClass)
-    if (!props.isFetching){
-      push('/classes')
-    }
+    axiosWithAuth(props.token)
+      .put(`classes/${params.id}`, editClass)
+      .then((res) => {
+        console.log(res)
+        push('/classes')
+      })
+      .catch((err) => console.log({ err }));
   };
 
   return (
     <div className="createContainer">
-      <h3>Create a class</h3>
+      <h3>Edit Class</h3>
       <form onSubmit={submit}>
         <label htmlFor="name">
           Class Name
@@ -66,7 +57,7 @@ const CreateClass = (props) => {
             id="name"
             type="text"
             name="name"
-            value={createClass.name}
+            value={editClass.name}
             onChange={handleChange}
             required
           />
@@ -76,23 +67,21 @@ const CreateClass = (props) => {
           Class Time
           <input
             id="time"
-            type="datetime-local"
+            type='text'
             name="time"
-            value={createClass.time}
+            value={editClass.time}
             onChange={handleChange}
-            required
           />
         </label>
 
         <label htmlFor="duration">
-          Class Duration in hours
+          Class Duration
           <input
             id="duration"
             type="number"
             name="duration"
-            value={createClass.duration}
+            value={editClass.duration}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -102,12 +91,10 @@ const CreateClass = (props) => {
             id="intensity"
             name="intensity"
             onChange={handleChange}
-            required
           >
-            <option></option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Expert">Expert</option>
+            <option value='Beginner'>Beginner</option>
+            <option value='Intermediate'>Intermediate</option>
+            <option value='Expert'>Expert</option>
           </select>
         </label>
 
@@ -116,21 +103,20 @@ const CreateClass = (props) => {
           <input
             id="location"
             name="location"
-            type="text"
-            value={createClass.location}
+            type='text'
+            value={editClass.location}
             onChange={handleChange}
           />
         </label>
 
         <label htmlFor="maxSize">
-          Maximum number of participants
+          Maximum class size
           <input
             id="maxSize"
             type="number"
             name="maxSize"
-            value={createClass.maxSize}
+            value={editClass.maxSize}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -140,9 +126,7 @@ const CreateClass = (props) => {
             id="classType"
             name="classType"
             onChange={handleChange}
-            required
           >
-            <option></option>
             <option value={1}>Pilates</option>
             <option value={2}>Boxing</option>
             <option value={3}>Running</option>
@@ -152,9 +136,12 @@ const CreateClass = (props) => {
         </label>
 
         <label htmlFor="imgUrl">
-          Choose an image
-          <select id="imgUrl" name="imgUrl" onChange={handleChange} required>
-            <option></option>
+          Img Selection
+          <select
+            id="imgUrl"
+            name="imgUrl"
+            onChange={handleChange}
+          >
             <option value={1}>Pilates</option>
             <option value={2}>Boxing</option>
             <option value={3}>Running</option>
@@ -163,63 +150,58 @@ const CreateClass = (props) => {
           </select>
         </label>
 
-        <label htmlFor="equipmentRequired">
-          Equipment Required
-          <input
+        <label htmlFor='equipmentRequired'>
+          Equipment Required 
+          <input 
             id="equipmentRequired"
             type="text"
             name="equipmentRequired"
-            value={createClass.equipmentRequired}
+            value={editClass.equipmentRequired}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="arrivalDescription">
+        <label htmlFor='arrivalDescription'>
           Arrival Description
-          <textarea
+          <textarea 
             id="arrivalDescription"
             type="text"
             name="arrivalDescription"
-            value={createClass.arrivalDescription}
+            value={editClass.arrivalDescription}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="additionalInfo">
-          Additional Info
-          <input
+        <label htmlFor='additionalInfo'>
+          Additional Info 
+          <input 
             id="additionalInfo"
             type="text"
             name="additionalInfo"
-            value={createClass.additionalInfo}
+            value={editClass.additionalInfo}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="cost">
+        <label htmlFor='cost'>
           Cost
           <input
             id="cost"
             type="number"
             name="cost"
-            value={createClass.cost}
+            value={editClass.cost}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="courseDescription">
-          Course Description
-          <input
+        <label htmlFor='courseDescription'>
+          Course Description 
+          <input 
             id="courseDescription"
             type="text"
             name="courseDescription"
-            value={createClass.courseDescription}
+            value={editClass.courseDescription}
             onChange={handleChange}
-            required
           />
         </label>
 
@@ -229,50 +211,34 @@ const CreateClass = (props) => {
             id="address"
             type="text"
             name="address"
-            value={createClass.address}
+            value={editClass.address}
             onChange={handleChange}
-            required
           />
         </label>
 
         <label htmlFor="startDate">
-          Start Date - Required Format mm-dd-yyyy
+          Start Date
           <input
             id="startDate"
             type="text"
             name="startDate"
-            required
-            pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])-(0[1-9]|1[012])-[0-9]{4}"
-            value={createClass.startDate}
+            value={editClass.startDate}
             onChange={handleChange}
-            required
           />
         </label>
 
-        <label htmlFor="days">
-          Enter days of the week
-          <input
-            id="days"
-            type="text"
-            name="days"
-            value={createClass.days}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <button>Submit</button>
+        <button>Submit</button> 
       </form>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
       token: state.login.token,
-      role: state.login.role,
       user: state.login.user,
-      isFetching: state.create.isFetching
+      classes: state.classes.classes
   }
 }
 
-export default connect( mapStateToProps, { createFetch } )( CreateClass );
+export default connect( mapStateToProps, null )( EditClass );
