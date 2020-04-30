@@ -1,5 +1,33 @@
+body {
+    background: url(https://github.com/Build-Week-Anywhere-Fitness1-April-2020/ui-marketing/blob/Anthony-Navarro/img/workout-1.jpg?raw=true) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+* {
+    text-decoration: none;
+}
+
 .nav-bar {
-    background-color: red;
+    display: flex;
+    background-color: @primary;
+    color: red;
+    justify-content: space-evenly;
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+    //opacity: 0.5;
+
+    @media @phone {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 300px;
+        opacity: 0.5;
+        font-size: 3em;
+    }
 }
 
 .team {
@@ -7,29 +35,77 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: @primary;
+    font-weight: bold;
+    margin: 15px;
+    padding: 15px;
+
+    @media @phone {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
 }
 
 img {
-    background-color: @primary;
-    border-radius: 50%;
+    background-color: @secondary;
+    padding: 10px;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
     width: 50%;
+    border-radius: 100px;
     height: 50%;
 }
 
+// .a {
+//     color: red;
+//     font-family: Arial, Helvetica, sans-serif;
+//     padding: 15px;
+// }
+
 img:hover {
-    //filter: grayscale(100%);
+    filter: grayscale(100%);
     //filter: invert(100%);
     //filter: sepia(100%);
     //filter: saturate(7);
-    filter: hue-rotate(180deg);
-    opacity: 0.5;
+    //filter: hue-rotate(180deg);
 }
 
-h3 {
-    color: red;
+h1 {
+    color: @primary;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+    padding: 20px;
+    margin: 20px;
+    font-size: 3em;
+    font-family: Raleway;
+    font-style: normal;
+}
+
+h3 {
+    color: @fontcolor;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    font-style: 2em;
     padding: 15px;
+    color: @primary;
+
+    @media @phone {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+h3:hover {
+    color: pruple;
 }

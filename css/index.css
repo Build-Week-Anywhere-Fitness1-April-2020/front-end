@@ -143,7 +143,7 @@ a {
   font-size: 28px;
   padding: 10px;
 }
-@media only screen and (max-width:700px) {
+@media only screen and (max-width:500px) {
   .fit {
     justify-content: flex-start;
     flex-direction: column;
@@ -157,7 +157,8 @@ a {
   }
 }
 span {
-  font-size: 28px;
+  padding-top: 20px;
+  font-size: 30px;
   color: black;
 }
 .nav {
@@ -168,12 +169,12 @@ span {
   font-family: raleway;
   font-style: normal;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   word-spacing: 40px;
-  background-color: #ecb651;
+  background-color: #ff9233;
 }
-@media only screen and (max-width:700px) {
+@media only screen and (max-width:500px) {
   .nav {
     flex-direction: column;
   }
@@ -188,10 +189,11 @@ span {
   font-style: normal;
   font-weight: bold;
   font-size: 22px;
-  color: #ecb651;
+  color: #ff9233;
 }
-@media only screen and (max-width:700px) {
+@media only screen and (max-width:500px) {
   .log {
+    display: flex;
     flex-direction: center;
     position: absolute;
     bottom: 10px;
@@ -199,40 +201,28 @@ span {
     margin: 20px 20px 0px 50px;
   }
 }
-.intro {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  align-self: center;
-  text-align: left;
-  font-size: 2em;
-  padding: 20px;
-  font-family: raleway;
-  font-style: normal;
-  font-weight: bold;
-  color: black;
-  margin: 20px 20px 0px 50px;
+body {
+  background: url(https://github.com/Build-Week-Anywhere-Fitness1-April-2020/ui-marketing/blob/Anthony-Navarro/img/workout-1.jpg?raw=true) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
-@media only screen and (max-width:700px) {
-  .intro {
-    display: none;
-  }
+.fit {
+  color: #ff9233;
 }
 p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  align-self: center;
-  text-align: left;
-  font-family: raleway;
+  font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
-  color: black;
-  padding: 15px;
+  color: #ff9233;
+  padding: 70px;
+  font-size: 3em;
 }
-@media only screen and (max-width:700px) {
+@media only screen and (max-width:500px) {
   p {
     display: flex;
     align-items: center;
@@ -240,68 +230,132 @@ p {
     text-align: center;
   }
 }
-.gym-img {
-  display: flex;
-  box-sizing: border-box;
-  flex-direction: column;
-  justify-content: flex-end;
-  float: right;
-}
-.gym-2 {
-  display: flex;
-  justify-content: flex-end;
-  width: 550px;
-}
-@media only screen and (max-width:700px) {
-  .gym-2 {
-    width: 100%;
-  }
-}
 .btn {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   flex-direction: center;
-  font-family: raleway;
+  font-family: Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
   border-radius: 20px;
+}
+@media only screen and (max-width:500px) {
+  .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    align-self: auto;
+  }
+}
+.btn .button-1 {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
-}
-.button-1 {
-  background-color: #ecb651;
-  color: whitesmoke;
-  border-radius: 20px;
+  flex-direction: center;
+  background-color: #ff9233;
+  color: black;
   padding: 10px;
+  margin: 40px 0 40px 0;
 }
-.button-2 {
-  background-color: #ecb651;
-  color: whitesmoke;
-  border-radius: 20px;
+.button-1:hover {
+  background-color: #ffaa99;
+  color: black;
+  opacity: 0.5;
+}
+body {
+  background: url(https://github.com/Build-Week-Anywhere-Fitness1-April-2020/ui-marketing/blob/Anthony-Navarro/img/workout-1.jpg?raw=true) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+* {
+  text-decoration: none;
 }
 .nav-bar {
-  background-color: red;
+  display: flex;
+  background-color: #ff9233;
+  color: red;
+  justify-content: space-evenly;
+  height: 30px;
+  padding-top: 10px;
+  text-align: center;
+}
+@media only screen and (max-width:500px) {
+  .nav-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 300px;
+    opacity: 0.5;
+    font-size: 3em;
+  }
 }
 .team {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  color: #ff9233;
+  font-weight: bold;
+  margin: 15px;
+  padding: 15px;
+}
+@media only screen and (max-width:500px) {
+  .team {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
 }
 img {
-  background-color: #ecb651;
-  border-radius: 50%;
+  background-color: #ffaa99;
+  padding: 10px;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   width: 50%;
+  border-radius: 100px;
   height: 50%;
 }
 img:hover {
-  filter: hue-rotate(180deg);
-  opacity: 0.5;
+  filter: grayscale(100%);
 }
-h3 {
-  color: red;
+h1 {
+  color: #ff9233;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  padding: 20px;
+  margin: 20px;
+  font-size: 3em;
+  font-family: Raleway;
+  font-style: normal;
+}
+h3 {
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  font-style: 2em;
   padding: 15px;
+  color: #ff9233;
+}
+@media only screen and (max-width:500px) {
+  h3 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+}
+h3:hover {
+  color: pruple;
 }

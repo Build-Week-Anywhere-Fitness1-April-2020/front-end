@@ -31,11 +31,13 @@ a {
         font-size: 28px;
         text-align: center;
         padding: 10px;
+
     }
 }
 
 span {
-    font-size: 28px;
+    padding-top: 20px;
+    font-size: 30px;
     color: black;
 }
 
@@ -47,15 +49,27 @@ span {
     font-family: raleway;
     font-style: normal;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 20px;
     text-align: center;
     word-spacing: 40px;
     background-color: @primary;
 
     @media @phone {
         flex-direction: column;
+
     }
 }
+
+// .nav-bar {
+//     padding: 20px;
+
+
+//     @media @phone {
+//         flex-direction: column;
+//         padding: 20px;
+
+//     }
+// }
 
 .log {
     display: flex;
@@ -70,7 +84,7 @@ span {
     color: @primary;
 
     @media @phone {
-
+        display: flex;
         flex-direction: center;
         position: absolute;
         bottom: 10px;
